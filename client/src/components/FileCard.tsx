@@ -42,10 +42,10 @@ export const FileCard: React.FC<FileProps> = ({ file, onDownload, onDelete }) =>
 
     return (
         <>
-            <div className="bg-white rounded-xl border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-4 relative group">
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-4 relative group">
                 <div className="flex items-start justify-between mb-4">
                     <div
-                        className="p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-blue-50 transition-colors"
+                        className="p-3 bg-gray-50 dark:bg-gray-700 rounded-xl cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors"
                         onClick={() => setShowPreview(true)}
                     >
                         {getIcon(file.mimeType)}
@@ -53,28 +53,28 @@ export const FileCard: React.FC<FileProps> = ({ file, onDownload, onDelete }) =>
                     <div className="relative" ref={menuRef}>
                         <button
                             onClick={() => setShowMenu(!showMenu)}
-                            className="p-1.5 hover:bg-gray-100 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+                            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
                         >
-                            <MoreVertical className="w-5 h-5 text-gray-500" />
+                            <MoreVertical className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                         </button>
 
                         {showMenu && (
-                            <div className="absolute right-0 top-8 w-48 bg-white rounded-xl shadow-xl border border-gray-100 z-10 py-1 overflow-hidden">
+                            <div className="absolute right-0 top-8 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 z-10 py-1 overflow-hidden">
                                 <button
                                     onClick={() => { setShowPreview(true); setShowMenu(false); }}
-                                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-2"
                                 >
                                     <Eye className="w-4 h-4" /> Preview
                                 </button>
                                 <button
                                     onClick={() => { onDownload(file); setShowMenu(false); }}
-                                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-2"
                                 >
                                     <Download className="w-4 h-4" /> Download
                                 </button>
                                 <button
                                     onClick={() => { onDelete(file); setShowMenu(false); }}
-                                    className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                                    className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-2"
                                 >
                                     <Trash2 className="w-4 h-4" /> Delete
                                 </button>
@@ -84,13 +84,13 @@ export const FileCard: React.FC<FileProps> = ({ file, onDownload, onDelete }) =>
                 </div>
 
                 <h3
-                    className="font-medium text-gray-700 truncate mb-1 cursor-pointer hover:text-primary transition-colors"
+                    className="font-medium text-gray-700 dark:text-gray-200 truncate mb-1 cursor-pointer hover:text-primary transition-colors"
                     title={file.name}
                     onClick={() => setShowPreview(true)}
                 >
                     {file.name}
                 </h3>
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                     <span>{formatSize(file.sizeBytes)}</span>
                     <span>{format(new Date(file.updatedAt), 'MMM d, yyyy')}</span>
                 </div>

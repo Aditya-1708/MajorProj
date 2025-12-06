@@ -28,11 +28,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     const total = user?.totalQuotaBytes ? BigInt(user.totalQuotaBytes) : BigInt(1);
     const percentage = Number((used * 100n) / total);
 
-    const sidebarClasses = clsx(
-        'fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 flex flex-col h-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0',
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-    );
-
     return (
         <>
             {/* Mobile Overlay */}
@@ -43,14 +38,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 />
             )}
 
-            <div className={sidebarClasses}>
-                <div className="p-6 flex items-center justify-between border-b border-gray-100">
+            <div className={clsx(
+                'fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col h-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0',
+                isOpen ? 'translate-x-0' : '-translate-x-full'
+            )}>
+                <div className="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
                     <div className="flex items-center gap-2">
                         <Cloud className="w-8 h-8 text-primary" />
-                        <span className="text-xl font-bold text-gray-700">DriveClone</span>
+                        <span className="text-xl font-bold text-gray-700 dark:text-white">DriveClone</span>
                     </div>
-                    <button onClick={onClose} className="md:hidden p-1 hover:bg-gray-100 rounded-full">
-                        <X className="w-5 h-5 text-gray-500" />
+                    <button onClick={onClose} className="md:hidden p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+                        <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                     </button>
                 </div>
 
@@ -61,7 +59,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                         className={({ isActive }) =>
                             clsx(
                                 'flex items-center gap-3 px-4 py-3 rounded-md transition-colors',
-                                isActive ? 'bg-blue-50 text-primary' : 'text-gray-700 hover:bg-gray-100'
+                                isActive ? 'bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                             )
                         }
                     >
@@ -74,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                         className={({ isActive }) =>
                             clsx(
                                 'flex items-center gap-3 px-4 py-3 rounded-md transition-colors',
-                                isActive ? 'bg-blue-50 text-primary' : 'text-gray-700 hover:bg-gray-100'
+                                isActive ? 'bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                             )
                         }
                     >
@@ -87,7 +85,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                         className={({ isActive }) =>
                             clsx(
                                 'flex items-center gap-3 px-4 py-3 rounded-md transition-colors',
-                                isActive ? 'bg-blue-50 text-primary' : 'text-gray-700 hover:bg-gray-100'
+                                isActive ? 'bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                             )
                         }
                     >
@@ -96,18 +94,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                     </NavLink>
                 </nav>
 
-                <div className="p-6 border-t border-gray-100">
-                    <div className="flex items-center gap-2 mb-2 text-sm text-gray-600">
+                <div className="p-6 border-t border-gray-100 dark:border-gray-800">
+                    <div className="flex items-center gap-2 mb-2 text-sm text-gray-600 dark:text-gray-400">
                         <Cloud className="w-4 h-4" />
                         <span>Storage</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-2">
                         <div
                             className="bg-primary h-2 rounded-full transition-all duration-500"
                             style={{ width: `${Math.min(percentage, 100)}%` }}
                         />
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-gray-500 dark:text-gray-500">
                         {formatBytes(user?.usedBytes || '0')} used of {formatBytes(user?.totalQuotaBytes || '0')}
                     </div>
                 </div>
