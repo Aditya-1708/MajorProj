@@ -7,6 +7,8 @@ import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import './index.css';
 
+import { ThemeProvider } from './context/ThemeContext';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -20,10 +22,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter>
-          <App />
-          <Toaster position="bottom-right" />
-        </BrowserRouter>
+        <ThemeProvider>
+          <BrowserRouter>
+            <App />
+            <Toaster position="bottom-right" />
+          </BrowserRouter>
+        </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>,

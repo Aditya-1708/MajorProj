@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import { Dashboard } from './pages/Dashboard';
 import { Login } from './pages/Login';
@@ -6,18 +6,20 @@ import { Profile } from './pages/Profile';
 import { Register } from './pages/Register';
 import { Trash } from './pages/Trash';
 
+import { Layout } from './components/Layout';
+
 const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center bg-white dark:bg-gray-900">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthenticated ? <Layout /> : <Navigate to="/login" />;
 };
 
 function App() {

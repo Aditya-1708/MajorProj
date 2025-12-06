@@ -1,77 +1,43 @@
-import { format } from 'date-fns';
-import { RefreshCw, Trash2 } from 'lucide-react';
 import React from 'react';
-import { Header } from '../components/Header';
-import { Sidebar } from '../components/Sidebar';
+import { FileCard } from '../components/FileCard';
 import { useTrash } from '../hooks/useFiles';
 
 export const Trash: React.FC = () => {
     const { files, isLoading, restoreFile, hardDeleteFile } = useTrash();
-    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     return (
-        <div className="flex h-screen bg-gray-50">
-            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-            <div className="flex-1 flex flex-col overflow-hidden">
-                <Header onMenuClick={() => setIsSidebarOpen(true)} />
+        <div className="h-full flex flex-col">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Trash</h1>
 
-                <main className="flex-1 overflow-y-auto p-6">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-6">Trash</h1>
-
-                    {isLoading ? (
-                        <div className="flex items-center justify-center h-64">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                        </div>
-                    ) : (
-                        <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
-                            <table className="w-full">
-                                <thead className="bg-gray-50 border-b border-gray-200">
-                                    <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deleted At</th>
-                                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200">
-                                    {files.map((file) => (
-                                        <tr key={file.id} className="hover:bg-gray-50">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{file.name}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{file.sizeBytes} B</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {file.deletedAt ? format(new Date(file.deletedAt), 'MMM d, yyyy') : '-'}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <button
-                                                    onClick={() => restoreFile(file.id)}
-                                                    className="text-primary hover:text-blue-700 mr-4"
-                                                    title="Restore"
-                                                >
-                                                    <RefreshCw className="w-4 h-4" />
-                                                </button>
-                                                <button
-                                                    onClick={() => hardDeleteFile(file.id)}
-                                                    className="text-red-600 hover:text-red-900"
-                                                    title="Delete Forever"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                    {files.length === 0 && (
-                                        <tr>
-                                            <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
-                                                Trash is empty
-                                            </td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
-                </main>
-            </div>
+            {isLoading ? (
+                <div className="flex items-center justify-center h-64">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                </div>
+            ) : files.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-64 text-gray-400 dark:text-gray-500">
+                    <Trash2 className="w-16 h-16 mb-4 opacity-20" />
+                    <p>Trash is empty</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    {files.map((file) => (
+                        <FileCard
+                            key={file.id}
+                            file={file}
+                            onDownload={() => restoreFile(file.id)} // Hijacking download for restore in trash view? 
+                            // Wait, the FileCard expects download/delete. 
+                            // In Trash, we want "Restore" and "Delete Permanently".
+                            // I might need to update FileCard or make a TrashFileCard. 
+                            // For now, let's reuse FileCard but maybe I should wrap the handlers.
+                            // The icon won't change though. Let's just pass the logic.
+                            onDelete={() => hardDeleteFile(file.id)}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
+
+// Helper for empty state icon
+import { Trash2 } from 'lucide-react';

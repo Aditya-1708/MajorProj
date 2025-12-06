@@ -74,10 +74,10 @@ export const FolderGrid: React.FC<FolderGridProps> = ({
                             <div key={folder.id} className="relative group">
                                 <button
                                     onClick={() => onNavigate(folder.id)}
-                                    className="w-full flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-200 hover:shadow-md hover:border-primary/30 transition-all text-left active:scale-95"
+                                    className="w-full flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-md hover:border-primary/30 dark:hover:border-primary/50 transition-all text-left active:scale-95"
                                 >
-                                    <Folder className="w-6 h-6 text-gray-400 fill-gray-100 group-hover:text-primary group-hover:fill-blue-50 transition-colors" />
-                                    <span className="font-medium text-gray-700 truncate group-hover:text-primary transition-colors flex-1">{folder.name}</span>
+                                    <Folder className="w-6 h-6 text-gray-400 dark:text-gray-500 fill-gray-100 dark:fill-gray-700 group-hover:text-primary group-hover:fill-blue-50 dark:group-hover:fill-blue-900/20 transition-colors" />
+                                    <span className="font-medium text-gray-700 dark:text-gray-200 truncate group-hover:text-primary transition-colors flex-1">{folder.name}</span>
                                 </button>
 
                                 <button
@@ -85,22 +85,22 @@ export const FolderGrid: React.FC<FolderGridProps> = ({
                                         e.stopPropagation();
                                         setActiveMenu(activeMenu === folder.id ? null : folder.id);
                                     }}
-                                    className="absolute top-3 right-2 p-1 rounded-full hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    className="absolute top-3 right-2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"
                                 >
-                                    <MoreVertical className="w-4 h-4 text-gray-500" />
+                                    <MoreVertical className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                                 </button>
 
                                 {activeMenu === folder.id && (
-                                    <div ref={menuRef} className="absolute top-8 right-2 w-32 bg-white rounded-lg shadow-xl border border-gray-100 z-10 py-1">
+                                    <div ref={menuRef} className="absolute top-8 right-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 z-10 py-1">
                                         <button
                                             onClick={(e) => handleRename(e, folder)}
-                                            className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                            className="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-2"
                                         >
-                                            <Edit2 className="w-3 h-3" /> Resize
+                                            <Edit2 className="w-3 h-3" /> Rename
                                         </button>
                                         <button
                                             onClick={(e) => handleDelete(e, folder)}
-                                            className="w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                                            className="w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-2"
                                         >
                                             <Trash2 className="w-3 h-3" /> Delete
                                         </button>

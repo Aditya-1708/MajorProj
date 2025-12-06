@@ -57,26 +57,26 @@ export const FilePreviewModal: React.FC<FilePreviewModalProps> = ({ file, onClos
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden">
-                <div className="flex items-center justify-between p-4 border-b">
-                    <h3 className="font-semibold text-lg truncate pr-4">{file.name}</h3>
+            <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden">
+                <div className="flex items-center justify-between p-4 border-b dark:border-gray-800">
+                    <h3 className="font-semibold text-lg truncate pr-4 text-gray-900 dark:text-white">{file.name}</h3>
                     <div className="flex items-center gap-2">
                         <a
                             href={downloadUrl}
-                            className="p-2 hover:bg-gray-100 rounded-full text-gray-600"
+                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-gray-600 dark:text-gray-400"
                             title="Download"
                         >
                             <Download className="w-5 h-5" />
                         </a>
                         <button
                             onClick={onClose}
-                            className="p-2 hover:bg-gray-100 rounded-full text-gray-600"
+                            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-gray-600 dark:text-gray-400"
                         >
                             <X className="w-5 h-5" />
                         </button>
                     </div>
                 </div>
-                <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-gray-50">
+                <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-gray-50 dark:bg-black/50">
                     {renderContent()}
                 </div>
             </div>
