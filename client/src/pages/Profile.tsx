@@ -9,6 +9,7 @@ import { useAuth } from '../hooks/useAuth';
 export const Profile: React.FC = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     const handleRequestDeletion = async () => {
         if (confirm('Are you sure you want to request account deletion? Your account will be deleted in 30 days.')) {
@@ -25,9 +26,9 @@ export const Profile: React.FC = () => {
 
     return (
         <div className="flex h-screen bg-gray-50">
-            <Sidebar />
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
             <div className="flex-1 flex flex-col overflow-hidden">
-                <Header />
+                <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
                 <main className="flex-1 overflow-y-auto p-6">
                     <h1 className="text-2xl font-bold text-gray-800 mb-6">Profile</h1>

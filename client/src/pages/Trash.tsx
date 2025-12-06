@@ -7,12 +7,13 @@ import { useTrash } from '../hooks/useFiles';
 
 export const Trash: React.FC = () => {
     const { files, isLoading, restoreFile, hardDeleteFile } = useTrash();
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
     return (
         <div className="flex h-screen bg-gray-50">
-            <Sidebar />
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
             <div className="flex-1 flex flex-col overflow-hidden">
-                <Header />
+                <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
                 <main className="flex-1 overflow-y-auto p-6">
                     <h1 className="text-2xl font-bold text-gray-800 mb-6">Trash</h1>
