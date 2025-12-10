@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthRequest, requireAuth } from "../middleware/auth";
+import { AuthRequest, requireAuth } from "../jobs/middleware/auth";
 import { AuthService } from "../services/authService";
 import { UserService } from "../services/userService";
 import { loginSchema, registerSchema } from "../utils/validation";

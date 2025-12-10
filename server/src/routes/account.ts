@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthRequest, requireAuth } from "../middleware/auth";
+import { AuthRequest, requireAuth } from "../jobs/middleware/auth";
 import { QuotaService } from "../services/quotaService";
 
 const router = Router();

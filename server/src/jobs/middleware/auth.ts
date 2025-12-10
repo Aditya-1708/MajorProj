@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import "multer"; // Ensure Multer types are augmented
-import { prisma } from "../index";
-import { verifyAccessToken } from "../utils/jwt";
+import { prisma } from "../../index";
+import { verifyAccessToken } from "../../utils/jwt";
 
 export interface AuthRequest extends Request {
   userId?: string;

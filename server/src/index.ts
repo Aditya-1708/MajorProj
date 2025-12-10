@@ -6,7 +6,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import "./utils/polyfill";
 
-import { errorHandler } from "./middleware/errorHandler";
+import { errorHandler } from "./jobs/middleware/errorHandler";
 import accountRoutes from "./routes/account";
 import adminRoutes from "./routes/admin";
 import authRoutes from "./routes/auth";

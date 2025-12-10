@@ -1,7 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 import { config } from "../config";
-import { AuthRequest, requireAuth } from "../middleware/auth";
+import { AuthRequest, requireAuth } from "../jobs/middleware/auth";
 import { FileService } from "../services/fileService";
 
 const router = Router();

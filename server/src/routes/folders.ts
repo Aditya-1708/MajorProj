@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { prisma } from "../index";
-import { AuthRequest, requireAuth } from "../middleware/auth";
+import { AuthRequest, requireAuth } from "../jobs/middleware/auth";
 import { createFolderSchema } from "../utils/validation";
 
 const router = Router();

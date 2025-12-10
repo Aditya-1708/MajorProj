@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { requireAuth } from "../middleware/auth";
+import { requireAuth } from "../jobs/middleware/auth";
 import { healthMonitor } from "../storage/HealthMonitor";
 import { raidManager } from "../storage/RaidManager";
 
